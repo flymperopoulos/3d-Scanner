@@ -30,29 +30,3 @@ x_scatter = [n/30 for n in x_scatter]
 
 ax.scatter(x_scatter, y_scatter, data)
 plt.show()
-
-# yData = [0]*50
-# ax1=plt.axes()  
- 
-# # make plot
-# line, = plt.plot(yData)
-# plt.ylim([10,40]) # set the y-range to 10 to 40
-
-# # data collection
-# while True:
-# 	data = ser.readline().rstrip()
-
-# 	if len(data.split('.'))==3:
-# 		yMin = float(min(yData))-10
-# 		yMax = floa t(min(yData))+10
-# 		plt.ylim([yMin,yMax])
-# 		yData.append(data)
-# 		del yData[0]
-# 		line.set_xData(np.arange(len(yData)))
-#         line.set_yData(yData)  # update the data
-#         plt.draw() # update the plot
-
-
-
-#     #newArray.append(var)
-#     #print newArray[len(newArray)-1]
