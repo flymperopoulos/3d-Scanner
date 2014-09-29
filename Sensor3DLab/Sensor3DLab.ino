@@ -2,45 +2,41 @@
  
 Servo servoHorizontal;  // create servo object to control a servo 
 Servo servoVertical;
-long previousMillis = 0;        // will store last time LED was updated
-
-int pos = 0;    // variable to store the servo position 
-int interval = 80; 
-int data;
 const int sensorPin = A1;
+const int servoPinX = 13;
+const int servoPinY = 9;
+
+long time = 0;          // will store last time LED was updated
+int sensingInterval = 100; 
 int counter;
 float data_sum;
-
-float sensorVoltage;
  
 void setup() 
 {
-  pinMode(sensorPin,INPUT);  
-  servoHorizontal.attach(13);  // attaches the servo on pin 9 to the servo object 
-  servoVertical.attach(9);  
+  pinMode(sensorPin, INPUT);  
+  servoHorizontal.attach(servoPinX);  // attaches the servo on pin 9 to the servo object 
+  servoVertical.attach(servoPinY);  
+  
   Serial.begin(9600);
 } 
  
-void loop() { 
-//   data = analogRead(sensorPin);
-//   sensorVoltage = data * (5.0/1023.0);
-
-  servoHorizontal.write(70);
+void loop() {
+  servoHorizontal.write(50);
   servoVertical.write(70);
   delay(2000);
-  previousMillis = millis();
+  time = millis();
   
-   for (int currentXPos = 65; currentXPos < 95; currentXPos++){
+   for (int currentXPos = 50; currentXPos < 90; currentXPos++){
      servoHorizontal.write(currentXPos);
-     for (int currentYPos = 70; currentYPos < 100; currentYPos++){
+     for (int currentYPos = 70; currentYPos < 110; currentYPos++){
        servoVertical.write(currentYPos);
        counter = 1;
        data_sum = 0.0;
-       while (millis() - previousMillis < interval) {
+       while (millis() - time < sensingInterval) {
          data_sum += analogRead(sensorPin) * 5.0/1023.0;
          counter++;
        }
-       previousMillis = millis();
+       time = millis();
        Serial.println(data_sum / counter);
      }
    }
