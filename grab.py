@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 import time
 from mpl_toolkits.mplot3d import Axes3D
 
-# time.sleep(1.5)
-
 ser = serial.Serial('/dev/tty.usbmodemfd121',9600)
 
 fig = plt.figure()
@@ -22,7 +20,6 @@ for x in range(900):
 
 for i in range(900):
 	data[i] = data[i] / max_data
-
 
 y_scatter = range(30) * 30
 x_scatter = range(900)
