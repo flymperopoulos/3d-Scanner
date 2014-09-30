@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import time
 from mpl_toolkits.mplot3d import Axes3D
 import math
+import csv
 
 x_size = 40
 y_size = 40
@@ -21,7 +22,7 @@ x_final = []
 y_final = []
 z_final = []
 
-ser = serial.Serial('/dev/tty.usbmodemfd121',9600)
+ser = serial.Serial('/dev/ttyACM2',9600)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
@@ -48,6 +49,12 @@ for i in data:
 x_scatter = range(totalData_size)
 x_scatter = [n/x_size for n in x_scatter]
 y_scatter = range(y_size) * x_size
+
+csv_file = open("data.csv", "wb")
+csv_writer = csv.writer(csv_file, delimiter='\t', quotechar='"', quoting=csv.QUOTE_ALL)
+
+for i in range(totalData_size):
+	csv_writer.writerow([x_scatter[i], y_scatter[i], expectedDistance[i]])
 
 print expectedDistance
 
